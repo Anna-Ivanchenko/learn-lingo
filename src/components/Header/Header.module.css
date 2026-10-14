@@ -1,0 +1,84 @@
+.header {
+  width: 100%;
+  max-width: 1184px;
+  min-height: 48px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  margin: 10px 0;
+  max-width: 661px;
+
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navigation a {
+  color: #121417;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.loginIcon {
+  color: var(--color-primary);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.registrationButton {
+  min-width: 166px;
+  min-height: 48px;
+  padding: 14px 39px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 700;  
+}
