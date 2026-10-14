@@ -1,0 +1,142 @@
+.hero {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 98px 108px 98px 64px;
+  border-radius: 30px;
+  background-color: #f8f8f8;
+}
+
+.title {
+  margin-bottom: 32px;
+  color: var(--color-text);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  border-radius: 8px;
+  background-color: #fbe9ba;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.description {
+  max-width: 471px;
+  margin-bottom: 64px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 267px;
+  min-height: 60px;
+  padding: 16px 88px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.button:hover {
+  background-color: #ffdc86;;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.button:active {
+  background-color: #ffdc86;
+}
+
+.imageWrapper {
+  flex: 0 1 568px;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Планшети */
+@media (max-width: 1024px) {
+  .hero {
+    gap: 16px;
+  }
+
+  .content {
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 1.2;
+  }
+
+  .description {
+    margin-bottom: 32px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+/* Мобільні пристрої */
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .title {
+    margin-bottom: 24px;
+    font-size: 32px;
+  }
+
+  .description {
+    margin-bottom: 24px;
+  }
+
+  .imageWrapper {
+    flex-basis: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

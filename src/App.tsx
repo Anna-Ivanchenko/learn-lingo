@@ -1,13 +1,14 @@
 import Header from './components/Header/Header';
+import Hero from './components/Hero/Hero';
+
 
 function App() {
   return (
     <>
-      <div className="container">
-        <Header />
-      </div>
+      <Header />
+      
       <main className="container">
-        <h1>Welcome to LearnLingo!</h1>
+        <Hero />
       </main>
     </>
   )
