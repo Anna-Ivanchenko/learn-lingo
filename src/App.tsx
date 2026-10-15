@@ -1,6 +1,8 @@
+import {Routes, Route} from 'react-router-dom';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
-import StatisticsSection from './components/StatisticsSection/StatisticsSection';
+import Home from './pages/Home/Home';
+import Teachers from './pages/Teachers/Teachers';
+import Favorites from './pages/Favorites/Favorites';
 
 
 function App() {
@@ -8,8 +10,11 @@ function App() {
     <>
       <Header />      
       <main className="container">
-        <Hero />
-        <StatisticsSection />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
       </main>
     </>
   )
