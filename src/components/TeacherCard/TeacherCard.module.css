@@ -1,0 +1,92 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 24px;
+  border-radius: 24px;
+  background-color: #fff;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 3px solid #f4c550;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.label {
+  margin: 0 0 8px;
+  color: rgba(18, 20, 23, 0.5);
+  font-size: 14px;
+}
+
+.name {
+  margin: 0;
+  color: #121417;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #121417;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.stats span+span {
+  padding-left: 16px;
+  border-left: 1px solid rgba(18, 20, 23, 0.2);
+}
+
+.stats strong {
+  color: #38cd3e;
+  font-weight: 500;
+}
+
+.description {
+  margin: 0 0 16px;
+  color: rgba(18, 20, 23, 0.7);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.level {
+  padding: 8px 12px;
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  border-radius: 35px;
+  color: #121417;
+  font-size: 14px;
+}
+
+.level:first-child {
+  border-color: #f4c550;
+  background-color: #f4c550;
+}
