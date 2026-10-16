@@ -10,6 +10,7 @@
   --color-primary: #f4c550;
   --color-black: #121417;
   --color-white: #ffffff;
+  --color-gray: #8a8a89;
 
   color: var(--color-text);
   background-color: var(--color-background);

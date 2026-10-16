@@ -4,7 +4,8 @@ import { onValue, ref } from 'firebase/database';
 import { database } from '../../services/firebase';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import type { Teacher } from '../../types/teacher';
-import css from './Teachers.module.css';
+import styles from './Teachers.module.css';
+
 
 function Teachers() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -33,10 +34,9 @@ function Teachers() {
   }, []);
 
   return (
-    <section className={css.teachers}>
-      <h1 className={css.title}>Teachers</h1>
+    <section className={styles.teachers}>
 
-      <div className={css.list}>
+      <div className={styles.list}>
         {teachers.map(teacher => (
           <TeacherCard key={teacher.id} teacher={teacher} />
         ))}

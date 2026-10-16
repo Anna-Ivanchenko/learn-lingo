@@ -1,0 +1,10 @@
+.teachers {
+  padding: 96px 64px;
+  background: #f8f8f8;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
