@@ -1,0 +1,218 @@
+/* ---------- Заголовок ---------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+/* ---------- Викладач ---------- */
+.teacher {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.teacherInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacherLabel {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--color-gray);
+}
+
+.teacherName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--color-text);
+}
+
+/* ---------- Форма ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 40px;
+}
+
+/* ---------- Питання + радіокнопки ---------- */
+.questionSection {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.question {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: var(--color-text);
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.reason {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.radio {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  /* разом 24x24, як на макеті */
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.radio::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.radio:checked {
+  border-color: var(--color-primary);
+}
+
+.radio:checked::before {
+  transform: scale(1);
+}
+
+.radio:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Поля вводу ---------- */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 54px;
+  padding: 16px 18px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-text);
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--color-text);
+  opacity: 1;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.input[aria-invalid='true'] {
+  border-color: #e5484d;
+}
+
+.error {
+  margin: 6px 0 0 18px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #e5484d;
+}
+
+/* ---------- Кнопка ---------- */
+.submitButton {
+  width: 100%;
+  height: 60px;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--color-primary);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+  color: var(--color-text);
+  transition: opacity 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

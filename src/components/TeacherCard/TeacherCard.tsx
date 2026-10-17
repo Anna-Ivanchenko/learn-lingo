@@ -1,10 +1,14 @@
 import type { Teacher } from '../../types/teacher';
 import { useState } from 'react';
+
 import styles from './TeacherCard.module.css';
+
 import { IoStar } from "react-icons/io5";
 import { FiBookOpen } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa6";
 import ellipse from '../../assets/icons/ellipse.svg';
+
+import BookingModal from '../BookingModal/BookingModal';
 
 
 interface TeacherCardProps {
@@ -14,6 +18,7 @@ interface TeacherCardProps {
 function TeacherCard({ teacher }: TeacherCardProps) {
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
     <article className={styles.card}>
@@ -120,15 +125,20 @@ function TeacherCard({ teacher }: TeacherCardProps) {
           <button
             className={styles.bookbutton}
             type="button"
-            onClick={() =>
-              alert(`Booking a trial lesson with ${teacher.name} ${teacher.surname}`)
-            }
+            onClick={() => setIsBookingOpen(true)}
           >
             Book trial lesson
           </button>
         )}
 
       </div>
+
+      {isBookingOpen && (
+        <BookingModal
+          teacher={teacher}
+          onClose={() => setIsBookingOpen(false)}
+        />
+      )}
     </article>
   )
 }

@@ -246,3 +246,17 @@
   line-height: 1.55556;
   color: var(--color-black);
 }
+
+.bookbutton:hover {
+  background-color: #ffdc86;
+  ;
+}
+
+.bookbutton:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.bookbutton:active {
+  background-color: #ffdc86;
+}
