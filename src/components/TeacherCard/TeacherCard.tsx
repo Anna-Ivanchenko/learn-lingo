@@ -1,4 +1,5 @@
 import type { Teacher } from '../../types/teacher';
+import { useState } from 'react';
 import styles from './TeacherCard.module.css';
 import { IoStar } from "react-icons/io5";
 import { FiBookOpen } from "react-icons/fi";
@@ -11,6 +12,9 @@ interface TeacherCardProps {
 }
 
 function TeacherCard({ teacher }: TeacherCardProps) {
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <article className={styles.card}>
       <div className={styles.border_avatar}><img
@@ -26,7 +30,7 @@ function TeacherCard({ teacher }: TeacherCardProps) {
       <div className={styles.content}>
         <div className={styles.header}>
           <div>
-            <p className={styles.label}>Language</p>
+            <p className={styles.label}>Languages</p>
             <h2 className={styles.name}>{teacher.name} {teacher.surname}</h2>
           </div>
         
@@ -47,24 +51,63 @@ function TeacherCard({ teacher }: TeacherCardProps) {
           </div>
         </div>
 
-        <p className={styles.description}>
+        <p className={styles.description_1}>
           <span className={styles.descLabel}>Speaks: </span>
           <span className={`${styles.descValue} ${styles.underline}`}>
             {teacher.languages.join(', ')}
           </span>
         </p>
 
-        <p className={styles.description}>
+        <p className={styles.description_2}>
           <span className={styles.descLabel}>Lesson Info: </span>
           <span className={styles.descValue}>{teacher.lesson_info}</span>
         </p>
 
-        <p className={styles.description}>
+        <p className={styles.description_3}>
           <span className={styles.descLabel}>Conditions: </span>
           <span className={styles.descValue}>{teacher.conditions.join(' ')}</span>
         </p>
 
-        <button className={styles.button}>Read more</button>
+        <button
+          className={`${styles.button} ${styles.readMoreButton}`}
+          type="button"
+          onClick={() => setIsExpanded(prev => !prev)}
+        >
+          {isExpanded ? 'Read less' : 'Read more'}
+        </button>
+
+        {isExpanded && (
+          <div className={styles.expanded}>
+            <p className={styles.description}>
+              {teacher.experience}
+            </p>
+
+            <div className={styles.reviews}>
+              {teacher.reviews.map((review, index) => (
+                <div
+                  className={styles.review}
+                  key={`${review.reviewer_name}-${index}`}
+                >
+                  <img 
+                    src={`https://i.pravatar.cc/100?u=${encodeURIComponent(review.reviewer_name)}`}
+                    alt={review.reviewer_name}
+                    className={styles.rewavatar}
+                  />
+                  <p className={styles.reviewerName}>
+                    {review.reviewer_name}
+                  </p>
+                  <p className={styles.reviewerRating}>
+                    <IoStar className={styles.iconstar} />
+                    {review.reviewer_rating.toFixed(1)}
+                  </p>
+                  <p className={styles.reviewComment}>{review.comment}</p>
+                </div>                  
+              ))}
+            </div>
+          </div>
+        )}
+
+
         <ul className={styles.levels}>
           {teacher.levels.map(level => (
             <li className={styles.level} key={level}>#
@@ -72,6 +115,19 @@ function TeacherCard({ teacher }: TeacherCardProps) {
             </li>
           ))}
         </ul>
+        
+        {isExpanded && (
+          <button
+            className={styles.bookbutton}
+            type="button"
+            onClick={() =>
+              alert(`Booking a trial lesson with ${teacher.name} ${teacher.surname}`)
+            }
+          >
+            Book trial lesson
+          </button>
+        )}
+
       </div>
     </article>
   )
