@@ -88,24 +88,12 @@ ol {
   list-style: none;
 }
 
-/* Спільний контейнер для контенту сторінок */
+
 .container {
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
   padding-inline: 64px;
+  background: #f8f8f8;
 }
 
-/* Планшети */
-@media (max-width: 1024px) {
-  .container {
-    padding-inline: 32px;
-  }
-}
-
-/* Мобільні пристрої */
-@media (max-width: 600px) {
-  .container {
-    padding-inline: 20px;
-  }
-}
