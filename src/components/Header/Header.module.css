@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
 }
 
 .navbar {
@@ -14,10 +13,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
   margin: 10px 0;
   max-width: 661px;
-
 }
 
 .logo {
@@ -43,15 +40,44 @@
 }
 
 .navigation a {
+  display: inline-block;
   color: #121417;
   font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
+  transform: scale(1);
+  transform-origin: center;
+  transition:
+    transform 200ms ease,
+    font-weight 200ms ease;
+}
+
+.navigation a:hover,
+.navigation a:focus-visible {
+  font-weight: 700;
+  transform: scale(1.08);
+}
+
+.navigation a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .actions {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.userName {
+  max-width: 180px;
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .loginButton {
@@ -65,6 +91,7 @@
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .loginIcon {
@@ -81,5 +108,55 @@
   background-color: var(--color-black);
   color: var(--color-white);
   font-size: 16px;
-  font-weight: 700;  
+  font-weight: 700;
+  cursor: pointer;
+}
+.logoutModal {
+  padding: 24px;
+}
+
+.logoutModal h2 {
+  margin: 0 0 16px;
+  color: var(--color-text);
+  font-size: 24px;
+}
+
+.logoutModal p {
+  margin: 0 0 24px;
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.logoutActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelButton,
+.confirmLogoutButton {
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.confirmLogoutButton {
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-black);
+}
+
+.cancelButton:hover,
+.confirmLogoutButton:hover {
+  opacity: 0.85;
 }

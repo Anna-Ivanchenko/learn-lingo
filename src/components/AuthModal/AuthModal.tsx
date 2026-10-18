@@ -1,14 +1,18 @@
+
 import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { auth } from '../../services/firebase';
-import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { SpinnerDotted } from 'spinners-react';
+import toast from 'react-hot-toast';
+
+import { auth } from '../../services/firebase';
 import Modal from '../Modal/Modal';
 import styles from './AuthModal.module.css';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export type AuthMode = 'login' | 'register';
 
@@ -24,41 +28,50 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (
-  event: React.FormEvent<HTMLFormElement>
-) => {
-  event.preventDefault();
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
 
-  try {
-    if (isLogin) {
-      await signInWithEmailAndPassword(auth, email, password);
-
-      toast.success('Welcome back!');
-      onClose();
+    if (isLoading) {
       return;
     }
 
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    setIsLoading(true);
 
-    await updateProfile(credential.user, {
-      displayName: name.trim(),
-    });
+    try {
+      if (isLogin) {
+        await signInWithEmailAndPassword(auth, email, password);
 
-    toast.success('Registration successful!');
-    onClose();
-  } catch (error) {
-    console.error('Authentication error:', error);
+        toast.success('Welcome back!');
+        onClose();
+        return;
+      }
 
-    toast.error(
-      'Could not complete registration. Please check your details and try again.'
-    );
-  }
-};
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      await updateProfile(credential.user, {
+        displayName: name.trim(),
+      });
+
+      toast.success('Registration successful!');
+      onClose();
+    } catch (error) {
+      console.error('Authentication error:', error);
+
+      toast.error(
+        'Could not complete authentication. Please check your details and try again.'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal onClose={onClose} labelledBy="auth-modal-title">
@@ -84,6 +97,7 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
               value={name}
               onChange={event => setName(event.target.value)}
               required
+              disabled={isLoading}
             />
           )}
 
@@ -96,6 +110,7 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
             value={email}
             onChange={event => setEmail(event.target.value)}
             required
+            disabled={isLoading}
           />
 
           <div className={styles.passwordField}>
@@ -109,6 +124,7 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
               onChange={event => setPassword(event.target.value)}
               minLength={6}
               required
+              disabled={isLoading}
             />
 
             <button
@@ -116,13 +132,28 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
               type="button"
               onClick={() => setShowPassword(previous => !previous)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
+              disabled={isLoading}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ?  <FiEye /> :<FiEyeOff /> }
             </button>
           </div>
 
-          <button className={styles.submitButton} type="submit">
-            {isLogin ? 'Log In' : 'Sign Up'}
+          <button
+            className={styles.submitButton}
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <SpinnerDotted
+                size={24}
+                thickness={100}
+                speed={100}
+                color="rgba(18, 20, 23, 1)"
+                aria-label="Loading"
+              />
+            ) : (
+              isLogin ? 'Log In' : 'Sign Up'
+            )}
           </button>
         </form>
       </div>

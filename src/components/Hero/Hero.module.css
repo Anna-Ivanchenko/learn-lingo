@@ -1,3 +1,7 @@
+.container {
+  background-color: none;
+}
+
 .hero {
   display: flex;
   align-items: stretch;

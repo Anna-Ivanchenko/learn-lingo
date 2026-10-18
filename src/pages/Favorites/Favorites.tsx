@@ -1,15 +1,25 @@
 
 import { useEffect, useState } from 'react';
 import { onValue, ref } from 'firebase/database';
+
 import { database } from '../../services/firebase';
 import { useFavorites } from '../../hooks/useFavorites';
 import TeacherList from '../../components/TeacherList/TeacherList';
+import Loader from '../../components/Loader/Loader';
 import type { Teacher } from '../../types/teacher';
+
 import styles from '../Teachers/Teachers.module.css';
 
 function Favorites() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const { favoriteIds, isFavoritesLoading, favoritesError } = useFavorites();
+  const [isTeachersLoading, setIsTeachersLoading] = useState(true);
+  const [teachersError, setTeachersError] = useState<string | null>(null);
+
+  const {
+    favoriteIds,
+    isFavoritesLoading,
+    favoritesError,
+  } = useFavorites();
 
   useEffect(() => {
     const teachersRef = ref(database, 'teachers');
@@ -31,9 +41,14 @@ function Favorites() {
         } else {
           setTeachers([]);
         }
+
+        setTeachersError(null);
+        setIsTeachersLoading(false);
       },
       error => {
         console.error('Failed to load teachers:', error);
+        setTeachersError('Failed to load teachers.');
+        setIsTeachersLoading(false);
       }
     );
 
@@ -44,13 +59,17 @@ function Favorites() {
     favoriteIds.includes(teacher.id)
   );
 
+  const isLoading = isTeachersLoading || isFavoritesLoading;
+  const error = teachersError || favoritesError;
+
   return (
     <section className={styles.teachers}>
-      {isFavoritesLoading && <p>Loading favorites...</p>}
 
-      {favoritesError && <p>{favoritesError}</p>}
-
-      {!isFavoritesLoading && !favoritesError && (
+      {isLoading ? (
+        <Loader message="Loading favorites..." />
+      ) : error ? (
+        <p role="alert">{error}</p>
+      ) : (
         <TeacherList
           teachers={favoriteTeachers}
           emptyMessage="You haven't added any teachers to your favorites yet."
