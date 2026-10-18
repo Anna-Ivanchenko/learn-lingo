@@ -1,5 +1,8 @@
 import type { Teacher } from '../../types/teacher';
 import { useState } from 'react';
+import { useFavorites } from '../../hooks/useFavorites';
+import { useAuth } from '../../contexts/useAuth';
+import toast from 'react-hot-toast';
 
 import styles from './TeacherCard.module.css';
 
@@ -19,7 +22,30 @@ function TeacherCard({ teacher }: TeacherCardProps) {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+
+  const { user } = useAuth();
+const { favoriteIds, toggleFavorite, isFavoritesLoading } = useFavorites();
+
+const isFavorite = favoriteIds.includes(teacher.id);
+
+const handleFavoriteClick = async () => {
+  if (!user) {
+    toast.error('Please log in to add teachers to your favorites.');
+    return;
+  }
+
+  if (isFavoritesLoading) {
+    toast.error('Please wait, favorites are loading.');
+    return;
+  }
+
+  const success = await toggleFavorite(teacher.id);
+
+  if (!success) {
+    toast.error('Could not update favorites. Please try again.');
+  }
+};
+  
 
   return (
     <article className={styles.card}>
@@ -60,7 +86,7 @@ function TeacherCard({ teacher }: TeacherCardProps) {
                 isFavorite ? 'Remove from favorites' : 'Add to favorites'
               }
               aria-pressed={isFavorite}
-              onClick={() => setIsFavorite(prev => !prev)}
+              onClick={handleFavoriteClick}
             >
               {isFavorite ? (
                 <FaHeart className={styles.iconheart} />

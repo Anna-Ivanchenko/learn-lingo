@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.loadMore {
+  display: block;
+  margin: 64px auto 0;
+  padding: 16px 48px;
+  width: 183px;
+  height: 60px;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.56;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+
+.loadMore:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.loadMore:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}

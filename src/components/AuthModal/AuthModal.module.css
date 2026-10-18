@@ -1,0 +1,94 @@
+.authModal {
+  width: 100%;
+}
+
+.title {
+  margin: 0 0 20px;
+  color: var(--color-text);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  margin: 0 0 40px;
+  color: rgba(18, 20, 23, 0.8);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  outline: none;
+  background-color: #fff;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: var(--color-text);
+  opacity: 1;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
+
+.passwordField {
+  position: relative;
+  width: 100%;
+}
+
+.passwordField .input {
+  padding-right: 72px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  padding: 4px 0;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.submitButton {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background-color: var(--color-primary);
+  color: #121417;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 200ms ease;
+}
+
+.submitButton:hover {
+  background-color: #f0bd42;
+}
+
+.submitButton:focus-visible,
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
