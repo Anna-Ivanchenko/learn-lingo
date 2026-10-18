@@ -100,16 +100,36 @@
 }
 
 .stats>.heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
   height: 24px;
   margin-left: 48px;
   padding: 0;
-  border-left: none;
+  background: transparent;
+  color: var(--color-black);
+}
+
+.stats>.heart:hover {
+  color: var(--color-primary);
+}
+
+.stats>.heart:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.stats>.heart.favorite {
+  color: var(--color-primary);
 }
 
 .iconheart {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  transition: color 250ms ease;
 }
 
 .description_1,.description_2,
@@ -121,7 +141,6 @@
 }
 .description_3 {
   margin-bottom: 0;
-
 }
 
 .descLabel {

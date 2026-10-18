@@ -5,7 +5,7 @@ import styles from './TeacherCard.module.css';
 
 import { IoStar } from "react-icons/io5";
 import { FiBookOpen } from "react-icons/fi";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaRegHeart, FaHeart } from 'react-icons/fa6';
 import ellipse from '../../assets/icons/ellipse.svg';
 
 import BookingModal from '../BookingModal/BookingModal';
@@ -19,6 +19,7 @@ function TeacherCard({ teacher }: TeacherCardProps) {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <article className={styles.card}>
@@ -50,9 +51,23 @@ function TeacherCard({ teacher }: TeacherCardProps) {
             <span>
               Price / 1 hour: <strong>{teacher.price_per_hour}$</strong>
             </span>
-            <span className={styles.heart}>
-              <FaRegHeart className={styles.iconheart} />
-            </span>
+            <button
+              type="button"
+              className={`${styles.heart} ${
+                isFavorite ? styles.favorite : ''
+              }`}
+              aria-label={
+                isFavorite ? 'Remove from favorites' : 'Add to favorites'
+              }
+              aria-pressed={isFavorite}
+              onClick={() => setIsFavorite(prev => !prev)}
+            >
+              {isFavorite ? (
+                <FaHeart className={styles.iconheart} />
+              ) : (
+                <FaRegHeart className={styles.iconheart} />
+              )}
+            </button>
           </div>
         </div>
 
