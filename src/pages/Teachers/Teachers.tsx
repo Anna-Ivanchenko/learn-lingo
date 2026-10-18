@@ -5,16 +5,23 @@ import Loader from '../../components/Loader/Loader';
 import styles from './Teachers.module.css';
 
 function Teachers() {
-  const { teachers, isLoading, error } = useTeachers();
+  const { teachers, hasMore, isLoading, isLoadingMore, error, loadMore, loadAll } =
+    useTeachers();
 
   return (
     <section className={styles.teachers}>
       {isLoading ? (
         <Loader message="Loading teachers..." />
-      ) : error ? (
+      ) : error && teachers.length === 0 ? (
         <p role="alert">{error}</p>
       ) : (
-        <TeacherList teachers={teachers} />
+        <TeacherList
+          teachers={teachers}
+          hasMore={hasMore}
+          isLoadingMore={isLoadingMore}
+          onLoadMore={loadMore}
+          onLoadAll={loadAll}
+        />
       )}
     </section>
   );

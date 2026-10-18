@@ -1,34 +1,26 @@
-import { useFavorites } from '../../hooks/useFavorites';
-import { useTeachers } from '../../hooks/useTeachers';
+import { useFavoriteTeachers } from '../../hooks/useFavoriteTeachers';
 import TeacherList from '../../components/TeacherList/TeacherList';
 import Loader from '../../components/Loader/Loader';
 
 import styles from '../Teachers/Teachers.module.css';
 
 function Favorites() {
-  const {
-    teachers,
-    isLoading: isTeachersLoading,
-    error: teachersError,
-  } = useTeachers();
-  const { favoriteIds, isFavoritesLoading, favoritesError } = useFavorites();
-
-  const favoriteTeachers = teachers.filter(teacher =>
-    favoriteIds.includes(teacher.id)
-  );
-
-  const isLoading = isTeachersLoading || isFavoritesLoading;
-  const error = teachersError || favoritesError;
+  const { teachers, hasMore, isLoading, isLoadingMore, error, loadMore, loadAll } =
+    useFavoriteTeachers();
 
   return (
     <section className={styles.teachers}>
       {isLoading ? (
         <Loader message="Loading favorites..." />
-      ) : error ? (
+      ) : error && teachers.length === 0 ? (
         <p role="alert">{error}</p>
       ) : (
         <TeacherList
-          teachers={favoriteTeachers}
+          teachers={teachers}
+          hasMore={hasMore}
+          isLoadingMore={isLoadingMore}
+          onLoadMore={loadMore}
+          onLoadAll={loadAll}
           emptyMessage="You haven't added any teachers to your favorites yet."
         />
       )}

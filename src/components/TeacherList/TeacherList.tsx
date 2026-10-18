@@ -8,10 +8,12 @@ import styles from './TeacherList.module.css';
 
 interface TeacherListProps {
   teachers: Teacher[];
+  hasMore: boolean;
+  isLoadingMore: boolean;
+  onLoadMore: () => void;
+  onLoadAll: () => void;
   emptyMessage?: string;
 }
-
-const TEACHERS_PER_PAGE = 4;
 
 const INITIAL_FILTERS: TeacherFilters = {
   language: '',
@@ -21,9 +23,12 @@ const INITIAL_FILTERS: TeacherFilters = {
 
 function TeacherList({
   teachers,
+  hasMore,
+  isLoadingMore,
+  onLoadMore,
+  onLoadAll,
   emptyMessage = 'No teachers found matching your filters.',
 }: TeacherListProps) {
-  const [visibleCount, setVisibleCount] = useState(TEACHERS_PER_PAGE);
   const [filters, setFilters] = useState<TeacherFilters>(INITIAL_FILTERS);
 
   const handleFilterChange = (
@@ -35,7 +40,9 @@ function TeacherList({
       [name]: value,
     }));
 
-    setVisibleCount(TEACHERS_PER_PAGE);
+    if (value && hasMore) {
+      onLoadAll();
+    }
   };
 
   const filteredTeachers = teachers.filter(teacher => {
@@ -56,8 +63,6 @@ function TeacherList({
     return matchesLanguage && matchesLevel && matchesPrice;
   });
 
-  const visibleTeachers = filteredTeachers.slice(0, visibleCount);
-
   return (
     <>
       <Filters
@@ -66,22 +71,21 @@ function TeacherList({
       />
 
       <div className={styles.list}>
-        {visibleTeachers.map(teacher => (
+        {filteredTeachers.map(teacher => (
           <TeacherCard key={teacher.id} teacher={teacher} />
         ))}
       </div>
 
-      {filteredTeachers.length === 0 && <p>{emptyMessage}</p>}
+      {filteredTeachers.length === 0 && !hasMore && !isLoadingMore && <p>{emptyMessage}</p>}
 
-      {visibleCount < filteredTeachers.length && (
+      {hasMore && (
         <button
           type="button"
           className={styles.loadMore}
-          onClick={() =>
-            setVisibleCount(prevCount => prevCount + TEACHERS_PER_PAGE)
-          }
+          disabled={isLoadingMore}
+          onClick={onLoadMore}
         >
-          Load More
+          {isLoadingMore ? 'Loading...' : 'Load More'}
         </button>
       )}
     </>
