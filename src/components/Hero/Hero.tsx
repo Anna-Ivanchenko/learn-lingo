@@ -1,8 +1,24 @@
 import styles from './Hero.module.css';
-import heroImage from '../../assets/images/hero-pic.webp';
+import { useTheme } from '../../contexts/useTheme';
+import type { Theme } from '../../contexts/ThemeContext';
+import heroOrange from '../../assets/images/hero-pic-orange.webp';
+import heroGreen from '../../assets/images/hero-pic-green.webp';
+import heroBlue from '../../assets/images/hero-pic-blue.webp';
+import heroPink from '../../assets/images/hero-pic-pink.webp';
+import heroRed from '../../assets/images/hero-pic-red.webp';
+
+const HERO_IMAGES: Record<Theme, string> = {
+  orange: heroOrange,
+  green: heroGreen,
+  blue: heroBlue,
+  pink: heroPink,
+  red: heroRed,
+};
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const { theme } = useTheme();
+
   return (
     <section className={styles.hero}>
       <div className={styles.content}>
@@ -17,7 +33,7 @@ const Hero = () => {
       <div className={styles.imageWrapper}>
     <img
       className={styles.image}
-      src={heroImage}
+      src={HERO_IMAGES[theme]}
       alt="LearnLingo student learning with a laptop"
     />
   </div>

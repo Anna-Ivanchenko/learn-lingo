@@ -5,13 +5,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import App from './App.tsx';
 import { AuthProvider } from './contexts/AuthProvider';
+import { ThemeProvider } from './contexts/ThemeProvider';
+import { FavoritesProvider } from './contexts/FavoritesProvider';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+      <ThemeProvider>
       <AuthProvider>
-        <App />        
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
           <Toaster
             position="top-center"
             toastOptions={{
@@ -45,6 +50,7 @@ createRoot(document.getElementById('root')!).render(
           />
 
       </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 );

@@ -1,4 +1,3 @@
-/* ---------- Заголовок ---------- */
 .header {
   display: flex;
   flex-direction: column;
@@ -22,7 +21,6 @@
   color: rgba(18, 20, 23, 0.8);
 }
 
-/* ---------- Викладач ---------- */
 .teacher {
   display: flex;
   align-items: flex-start;
@@ -58,7 +56,6 @@
   color: var(--color-text);
 }
 
-/* ---------- Форма ---------- */
 .form {
   display: flex;
   flex-direction: column;
@@ -66,7 +63,6 @@
   gap: 40px;
 }
 
-/* ---------- Питання + радіокнопки ---------- */
 .questionSection {
   min-width: 0;
   margin: 0;
@@ -112,7 +108,6 @@
   width: 20px;
   height: 20px;
   margin: 2px;
-  /* разом 24x24, як на макеті */
   border: 2px solid rgba(18, 20, 23, 0.2);
   border-radius: 50%;
   cursor: pointer;
@@ -142,7 +137,6 @@
   outline-offset: 2px;
 }
 
-/* ---------- Поля вводу ---------- */
 .fields {
   display: flex;
   flex-direction: column;
@@ -191,7 +185,6 @@
   color: #e5484d;
 }
 
-/* ---------- Кнопка ---------- */
 .submitButton {
   width: 100%;
   height: 60px;
@@ -216,3 +209,18 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 767px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .form {
+    margin-top: 32px;
+    gap: 32px;
+  }
+
+  .question {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

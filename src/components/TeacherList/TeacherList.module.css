@@ -27,3 +27,13 @@
   outline: 2px solid var(--color-black);
   outline-offset: 3px;
 }
+
+@media (max-width: 767px) {
+  .list {
+    gap: 20px;
+  }
+
+  .loadMore {
+    margin-top: 32px;
+  }
+}

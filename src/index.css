@@ -4,7 +4,7 @@
   font-weight: 400;
   line-height: 1.5;
 
-  /* Кольори проєкту */
+
   --color-text: #121417;
   --color-background: #ffffff;
   --color-primary: #f4c550;
@@ -96,3 +96,39 @@ ol {
   padding-inline: 64px;
 }
 
+@media screen and (max-width: 1439px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+[data-theme='green'] {
+  --color-primary: #9fbaae;
+  --color-primary-hover: #cbded3;
+  --color-primary-soft: #cbded3;
+}
+
+[data-theme='blue'] {
+  --color-primary: #9fb7ce;
+  --color-primary-hover: #bfd6ea;
+  --color-primary-soft: #bfd6ea;
+}
+
+[data-theme='pink'] {
+  --color-primary: #e0a39a;
+  --color-primary-hover: #f2c0bd;
+  --color-primary-soft: #f2c0bd;
+}
+
+[data-theme='red'] {
+  --color-primary: #f0aa8d;
+  --color-primary-hover: #f4c8ba;
+  --color-primary-soft: #f4c8ba;
+}

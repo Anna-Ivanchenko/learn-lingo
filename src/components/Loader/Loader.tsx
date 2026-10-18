@@ -17,7 +17,7 @@ function Loader({ message }: LoaderProps) {
         size={70}
         thickness={95}
         speed={100}
-        color="rgba(244, 197, 80, 1)"
+        color="var(--color-primary)"
       />
 
       <span className={styles.message}>

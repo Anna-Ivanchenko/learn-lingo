@@ -1,14 +1,15 @@
 
 import { signOut } from 'firebase/auth';
-import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { FiLogIn, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
 
 import { auth } from '../../services/firebase';
 import { useAuth } from '../../contexts/useAuth';
 import AuthModal from '../AuthModal/AuthModal';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import type { AuthMode } from '../AuthModal/AuthModal';
 
 import styles from './Header.module.css';
@@ -17,6 +18,7 @@ import logo from '../../assets/icons/logo.svg';
 const Header = () => {
   const [authMode, setAuthMode] = useState<AuthMode | null>(null);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user } = useAuth();
   const { pathname } = useLocation();
@@ -40,11 +42,59 @@ const Header = () => {
     setAuthMode(null);
   };
 
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const openAuthFromMenu = (mode: AuthMode) => {
+    setAuthMode(mode);
+    closeMenu();
+  };
+
+  const openLogoutFromMenu = () => {
+    setIsLogoutModalOpen(true);
+    closeMenu();
+  };
+
+  // Поки відкрите мобільне меню: блокуємо скрол сторінки, закриваємо по Escape
+  // і автоматично, якщо вікно розтягнули до десктопної ширини.
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const desktopQuery = window.matchMedia('(min-width: 1440px)');
+    const handleResize = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    desktopQuery.addEventListener('change', handleResize);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+      desktopQuery.removeEventListener('change', handleResize);
+    };
+  }, [isMenuOpen]);
+
+  const getMobileLinkClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? `${styles.mobileLink} ${styles.mobileLinkActive}` : styles.mobileLink;
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.navbar}>
-          <Link to="/" className={styles.logo}>
+          <Link to="/" className={styles.logo} onClick={closeMenu}>
             <img src={logo} alt="Logo" className={styles.logoIcon} />
             <span>LearnLingo</span>
           </Link>
@@ -71,6 +121,8 @@ const Header = () => {
         </div>
 
         <div className={styles.actions}>
+          <ThemeSwitcher />
+
           {user ? (
             <>
               <span className={styles.userName} title={displayName ?? ''}>
@@ -106,6 +158,87 @@ const Header = () => {
               </button>
             </>
           )}
+        </div>
+
+        <button
+          type="button"
+          className={styles.burgerButton}
+          onClick={() => setIsMenuOpen(prev => !prev)}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          {isMenuOpen ? <FiX /> : <FiMenu />}
+        </button>
+
+        <div
+          id="mobile-menu"
+          className={`${styles.mobileMenu} ${
+            isMenuOpen ? styles.mobileMenuOpen : ''
+          }`}
+        >
+          <nav aria-label="Mobile navigation">
+            <ul className={styles.mobileList}>
+              {user && (
+                <li className={styles.mobileUser} title={displayName ?? ''}>
+                  {displayName}
+                </li>
+              )}
+              <li>
+                <NavLink to="/" end className={getMobileLinkClass} onClick={closeMenu}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/teachers" className={getMobileLinkClass} onClick={closeMenu}>
+                  Teachers
+                </NavLink>
+              </li>
+              {user && (
+                <li>
+                  <NavLink to="/favorites" className={getMobileLinkClass} onClick={closeMenu}>
+                    Favorites
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </nav>
+
+          <div className={styles.mobileActions}>
+            {user ? (
+              <button
+                type="button"
+                className={styles.mobileSecondaryButton}
+                onClick={openLogoutFromMenu}
+              >
+                <FiLogOut className={styles.loginIcon} />
+                Log out
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className={styles.mobileSecondaryButton}
+                  onClick={() => openAuthFromMenu('login')}
+                >
+                  <FiLogIn className={styles.loginIcon} />
+                  Log in
+                </button>
+                <button
+                  type="button"
+                  className={styles.mobilePrimaryButton}
+                  onClick={() => openAuthFromMenu('register')}
+                >
+                  Registration
+                </button>
+              </>
+            )}
+          </div>
+
+          <div className={styles.mobileTheme}>
+            <span>Theme</span>
+            <ThemeSwitcher />
+          </div>
         </div>
       </header>
 

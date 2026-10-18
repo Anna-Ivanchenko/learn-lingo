@@ -13,6 +13,15 @@
     />
 
     <title>LearnLingo</title>
+
+    <script>
+      try {
+        var t = localStorage.getItem("learn-lingo-theme");
+        if (["orange", "green", "blue", "pink", "red"].indexOf(t) !== -1) {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

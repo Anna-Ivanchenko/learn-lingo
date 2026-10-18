@@ -87,7 +87,7 @@
 }
 
 .submitButton:hover {
-  background-color: #f0bd42;
+  background-color: var(--color-primary-hover);
 }
 
 .submitButton:focus-visible,
@@ -95,8 +95,19 @@
   outline: 2px solid var(--color-text);
   outline-offset: 3px;
 }
+
 .passwordToggle svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .description {
+    margin-bottom: 24px;
+  }
 }

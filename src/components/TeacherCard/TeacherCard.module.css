@@ -12,12 +12,13 @@
   position: relative;
   flex-shrink: 0;
 }
+
 .avatar {
   width: 120px;
   height: 120px;
   flex-shrink: 0;
   object-fit: cover;
-  border: 3px solid #fbe9ba;
+  border: 3px solid var(--color-primary-soft);
   border-radius: 50%;
   padding: 12px;
 }
@@ -65,12 +66,12 @@
   font-weight: 500;
   flex-shrink: 0;
   height: 24px;
-  color: var(--collor-black);
+  color: var(--color-black);
   font-size: 16px;
-  white-space: nowrap;  
+  white-space: nowrap;
 }
 
-.stats > span {
+.stats>span {
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -79,7 +80,7 @@
   padding: 0 16px;
 }
 
-.stats > span + span {
+.stats>span+span {
   border-left: 1px solid rgba(18, 20, 23, 0.2);
 }
 
@@ -132,13 +133,15 @@
   transition: color 250ms ease;
 }
 
-.description_1,.description_2,
+.description_1,
+.description_2,
 .description_3 {
   margin: 0 0 8px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
 }
+
 .description_3 {
   margin-bottom: 0;
 }
@@ -194,8 +197,9 @@
 
 .expanded {
   margin-top: 16px;
-  
+
 }
+
 .description {
   color: var(--color-black);
 }
@@ -267,8 +271,7 @@
 }
 
 .bookbutton:hover {
-  background-color: #ffdc86;
-  ;
+  background-color: var(--color-primary-hover);
 }
 
 .bookbutton:focus-visible {
@@ -277,5 +280,126 @@
 }
 
 .bookbutton:active {
-  background-color: #ffdc86;
+  background-color: var(--color-primary-hover);
+}
+
+
+@media (max-width: 1439px) {
+  .card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 24px;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .content,
+  .header {
+    display: contents;
+  }
+
+  .content>*,
+  .header>* {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .border_avatar {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .header>.title {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    padding-right: 48px;
+    /* місце під сердечко */
+  }
+
+  .name {
+    white-space: normal;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    height: auto;
+    margin: 24px 0;
+  }
+
+  .stats>span,
+  .stats>span+span {
+    height: auto;
+    padding: 0;
+    border-left: none;
+  }
+
+  .stats>.heart {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    column-gap: 16px;
+    row-gap: 0;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    padding: 8px;
+    border-width: 2px;
+  }
+
+  .ellipse {
+    top: 13px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .name {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .header>.title {
+    padding-right: 36px;
+  }
+
+  .stats {
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .stats>.heart {
+    top: 16px;
+    right: 16px;
+  }
+
+  .description_1,
+  .description_2,
+  .description_3 {
+    font-size: 14px;
+  }
+
+  .levels {
+    margin-top: 24px;
+  }
+
+  .bookbutton {
+    width: 100%;
+  }
 }

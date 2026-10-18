@@ -1,0 +1,43 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swatch {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(18, 20, 23, 0.2);
+  cursor: pointer;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+}
+
+.swatch:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.active {
+  box-shadow: 0 0 0 2px var(--color-black);
+}
+
+.orange { background-color: #f4c550; }
+.green  { background-color: #9fbaae; }
+.blue   { background-color: #9fb7ce; }
+.pink    { background-color: #e0a39a; }
+.red { background-color: #f0aa8d; }
+
+@media (prefers-reduced-motion: reduce) {
+  .swatch {
+    transition: none;
+  }
+}

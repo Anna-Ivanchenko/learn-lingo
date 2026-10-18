@@ -32,7 +32,7 @@
 
 .titleAccent {
   border-radius: 8px;
-  background-color: #fbe9ba;
+  background-color: var(--color-primary-soft);
   font-style: italic;
   font-weight: 400;
 }
@@ -66,7 +66,7 @@
 }
 
 .button:hover {
-  background-color: #ffdc86;;
+  background-color: var(--color-primary-hover);
 }
 
 .button:focus-visible {
@@ -75,7 +75,7 @@
 }
 
 .button:active {
-  background-color: #ffdc86;
+  background-color: var(--color-primary-hover);
 }
 
 .imageWrapper {
@@ -91,17 +91,17 @@
   height: auto;
 }
 
-/* Планшети */
-@media (max-width: 1024px) {
+@media (max-width: 1439px) {
   .hero {
     gap: 16px;
   }
 
   .content {
-    padding: 32px;
+    padding: 48px 32px;
   }
 
   .title {
+    margin-bottom: 24px;
     font-size: 36px;
     line-height: 1.2;
   }
@@ -112,11 +112,15 @@
 
   .button {
     width: 100%;
+    max-width: 267px;
+  }
+
+  .imageWrapper {
+    flex-basis: 45%;
   }
 }
 
-/* Мобільні пристрої */
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .hero {
     flex-direction: column;
   }
@@ -126,12 +130,16 @@
   }
 
   .title {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     font-size: 32px;
   }
 
   .description {
     margin-bottom: 24px;
+  }
+
+  .button {
+    max-width: none;
   }
 
   .imageWrapper {

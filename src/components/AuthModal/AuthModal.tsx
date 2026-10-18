@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 import { auth } from '../../services/firebase';
 import Modal from '../Modal/Modal';
+import { getAuthErrorMessage } from '../../utils/getAuthErrorMessage';
 import styles from './AuthModal.module.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
@@ -65,9 +66,7 @@ function AuthModal({ mode, onClose }: AuthModalProps) {
     } catch (error) {
       console.error('Authentication error:', error);
 
-      toast.error(
-        'Could not complete authentication. Please check your details and try again.'
-      );
+      toast.error(getAuthErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

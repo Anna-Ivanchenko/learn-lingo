@@ -61,7 +61,7 @@ const handleFavoriteClick = async () => {
     
       <div className={styles.content}>
         <div className={styles.header}>
-          <div>
+          <div className={styles.title}>
             <p className={styles.label}>Languages</p>
             <h2 className={styles.name}>{teacher.name} {teacher.surname}</h2>
           </div>
