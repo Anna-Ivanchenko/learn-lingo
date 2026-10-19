@@ -30,19 +30,25 @@ const isFavorite = favoriteIds.includes(teacher.id);
 
 const handleFavoriteClick = async () => {
   if (!user) {
-    toast.error('Please log in to add teachers to your favorites.');
+    toast.error('Please log in to add teachers to your favorites.', {
+      id: 'login-required',
+    });
     return;
   }
 
   if (isFavoritesLoading) {
-    toast.error('Please wait, favorites are loading.');
+    toast.error('Please wait, favorites are loading.', {
+      id: 'favorites-loading',
+    });
     return;
   }
 
   const success = await toggleFavorite(teacher.id);
 
   if (!success) {
-    toast.error('Could not update favorites. Please try again.');
+    toast.error('Could not update favorites. Please try again.', {
+      id: 'favorites-loading',
+    });
   }
 };
   

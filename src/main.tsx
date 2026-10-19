@@ -22,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
             toastOptions={{
               duration: 4000,
               style: {
+                pointerEvents: 'none',
                 minWidth: '320px',
                 maxWidth: '420px',
                 padding: '16px 20px',

@@ -21,6 +21,8 @@ const INITIAL_FILTERS: TeacherFilters = {
   price: '',
 };
 
+const TEACHERS_PER_PAGE = 4;
+
 function TeacherList({
   teachers,
   hasMore,
@@ -30,6 +32,7 @@ function TeacherList({
   emptyMessage = 'No teachers found matching your filters.',
 }: TeacherListProps) {
   const [filters, setFilters] = useState<TeacherFilters>(INITIAL_FILTERS);
+  const [visibleCount, setVisibleCount] = useState(TEACHERS_PER_PAGE);
 
   const handleFilterChange = (
     name: keyof TeacherFilters,
@@ -40,8 +43,20 @@ function TeacherList({
       [name]: value,
     }));
 
+    setVisibleCount(TEACHERS_PER_PAGE);
+
     if (value && hasMore) {
       onLoadAll();
+    }
+  };
+
+  const handleLoadMore = () => {
+    const nextCount = visibleCount + TEACHERS_PER_PAGE;
+
+    setVisibleCount(nextCount);
+
+    if (nextCount > teachers.length && hasMore) {
+      onLoadMore();
     }
   };
 
@@ -63,6 +78,9 @@ function TeacherList({
     return matchesLanguage && matchesLevel && matchesPrice;
   });
 
+  const visibleTeachers = filteredTeachers.slice(0, visibleCount);
+  const canLoadMore = visibleCount < filteredTeachers.length || hasMore;
+
   return (
     <>
       <Filters
@@ -71,19 +89,19 @@ function TeacherList({
       />
 
       <div className={styles.list}>
-        {filteredTeachers.map(teacher => (
+        {visibleTeachers.map(teacher => (
           <TeacherCard key={teacher.id} teacher={teacher} />
         ))}
       </div>
 
       {filteredTeachers.length === 0 && !hasMore && !isLoadingMore && <p>{emptyMessage}</p>}
 
-      {hasMore && (
+      {canLoadMore && (
         <button
           type="button"
           className={styles.loadMore}
           disabled={isLoadingMore}
-          onClick={onLoadMore}
+          onClick={handleLoadMore}
         >
           {isLoadingMore ? 'Loading...' : 'Load More'}
         </button>

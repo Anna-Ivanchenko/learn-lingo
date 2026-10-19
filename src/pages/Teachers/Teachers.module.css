@@ -1,6 +1,8 @@
 .teachers {
   padding: 24px 64px;
   background: #f8f8f8;
+  box-shadow: 0 0 0 100vmax #f8f8f8;
+  clip-path: inset(0 -100vmax);
 }
 
 @media (max-width: 1439px) {
@@ -14,5 +16,7 @@
   .teachers {
     padding: 16px 0;
     background: transparent;
+    box-shadow: none;
+    clip-path: none;
   }
 }
